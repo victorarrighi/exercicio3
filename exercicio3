@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastro de Produtos</title>
+</head>
+<body>
+  <h1>Cadastro de Produtos</h1>
+  
+  <form id="productForm">
+    <label for="productName">Nome do Produto:</label>
+    <input type="text" id="productName" required><br><br>
+    
+    <label for="productQuantity">Quantidade:</label>
+    <input type="number" id="productQuantity" required><br><br>
+    
+    <label for="manufactureDate">Data de Fabricação:</label>
+    <input type="date" id="manufactureDate" required><br><br>
+    
+    <label for="expiryDate">Data de Validade:</label>
+    <input type="date" id="expiryDate" required><br><br>
+    
+    <label for="productPrice">Preço:</label>
+    <input type="number" id="productPrice" step="0.01" required><br><br>
+    
+    <button type="button" onclick="addProduct()">Adicionar Produto</button>
+  </form>
+
+  <hr>
+
+  <h2>Remover Produto</h2>
+  <label for="removeProductName">Nome do Produto:</label>
+  <input type="text" id="removeProductName">
+  <button type="button" onclick="removeProduct()">Remover Produto</button>
+
+  <script>
+    let products = [];
+
+    function addProduct() {
+      const productName = document.getElementById("productName").value;
+      const productQuantity = document.getElementById("productQuantity").value;
+      const manufactureDate = document.getElementById("manufactureDate").value;
+      const expiryDate = document.getElementById("expiryDate").value;
+      const productPrice = document.getElementById("productPrice").value;
+
+      const product = {
+        name: productName,
+        quantity: productQuantity,
+        manufactureDate: manufactureDate,
+        expiryDate: expiryDate,
+        price: productPrice
+      };
+
+      products.push(product);
+      console.log("Produto adicionado:", product);
+      console.log("Lista de Produtos:", products);
+    }
+
+    function removeProduct() {
+      const removeProductName = document.getElementById("removeProductName").value;
+      const index = products.findIndex(product => product.name === removeProductName);
+      
+      if (index !== -1) {
+        const removedProduct = products.splice(index, 1);
+        console.log("Produto removido:", removedProduct[0]);
+        console.log("Lista de Produtos atualizada:", products);
+      } else {
+        console.log("Produto não encontrado na lista.");
+      }
+    }
+  </script>
+</body>
+</html>
